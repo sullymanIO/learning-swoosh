@@ -51,10 +51,15 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let longDoubleVal = Double(Long!)
             Title = alert?.textFields?[2].text
             Description = alert?.textFields?[3].text
+            if Lat != nil && latDoubleVal != nil && Long != nil &&  longDoubleVal != nil{
+                
             let addToDoItem = self.toDoListObj.setValuesLatLong(uLat: latDoubleVal!, uLong: longDoubleVal!, uTitle: Title!, uSnippet: Description!)
             print(addToDoItem)
             self.tableViewout.reloadData()
+            }
+            
         }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
    
         // 4. Present the alert.
         self.present(alert, animated: true, completion: nil)
