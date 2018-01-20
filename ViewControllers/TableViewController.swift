@@ -8,14 +8,13 @@
 
 import UIKit
 
-var items = ["apple", "banana", "carrot"]
 class TableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var mapLat: Double?
     var mapLong: Double?
     var mapTitle: String?
     var mapDescription: String?
     @IBOutlet weak var tableViewout: UITableView!
-    
+
     let toDoListObj: toDolatlong = toDolatlong()
     //Add to do item button click
     
@@ -54,8 +53,8 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
             if Lat != nil && latDoubleVal != nil && Long != nil &&  longDoubleVal != nil{
                 
             let addToDoItem = self.toDoListObj.setValuesLatLong(uLat: latDoubleVal!, uLong: longDoubleVal!, uTitle: Title!, uSnippet: Description!)
-            print(addToDoItem)
-            self.tableViewout.reloadData()
+                print(addToDoItem)
+                self.tableViewout.reloadData()
             }
             
         }))
@@ -88,9 +87,18 @@ class TableViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewout.dequeueReusableCell(withIdentifier: "cell")
-        cell?.textLabel?.text = toDoList[indexPath.row].getTitle()
-        return (cell)!
+        let cell = tableViewout.dequeueReusableCell(withIdentifier: "cell") as! TodoTableViewCell
+//        cell?.textLabel?.text = toDoList[indexPath.row].getTitle()
+        
+        cell.toDoTitle.text = toDoList[indexPath.row].getTitle()
+        cell.toDoDes.text = toDoList[indexPath.row].getSnippet()
+        
+        return (cell)
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
     override func viewDidLoad() {
